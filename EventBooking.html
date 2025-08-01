@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/booking.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div
+      class="max-w-lg w-full bg-white p-10 rounded-3xl shadow-xl border border-gray-200"
+    >
+      <form id="BookingForm" class="space-y-8">
+        <h2 class="text-4xl font-bold text-center text-primary">
+          จองตั๋วกิจกรรม
+        </h2>
+        <p class="text-gray-500 text-center text-base">
+          กรอกข้อมูลของคุณเพื่อรับตั๋วเข้าร่วมกิจกรรมสุดพิเศษ
+        </p>
+
+        <div>
+          <label for="fullName" class="block mb-2 font-semibold text-primary"
+            >ชื่อ-นามสกุล</label
+          >
+          <input
+            type="text"
+            id="fullName"
+            class="w-full border border-gray-300 rounded-xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+            placeholder="ชื่อและนามสกุล"
+          />
+          <p id="fullNameError" class="text-sm text-red-600 mt-2"></p>
+        </div>
+
+        <div>
+          <label for="phone" class="block mb-2 font-semibold text-primary"
+            >เบอร์โทร</label
+          >
+          <input
+            type="text"
+            id="phone"
+            class="w-full border border-gray-300 rounded-xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+            placeholder="เบอร์โทรศัพท์ 10 หลัก"
+          />
+          <p id="phoneError" class="text-sm text-red-600 mt-2"></p>
+        </div>
+
+        <div>
+          <label for="ticketType" class="block mb-2 font-semibold text-primary"
+            >ประเภทตั๋ว</label
+          >
+          <select
+            id="ticketType"
+            class="w-full border border-gray-300 rounded-xl p-4 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+          >
+            <option value="" disabled selected>-- เลือกประเภท --</option>
+            <option value="vip">VIP</option>
+            <option value="premium">Premium</option>
+            <option value="regular">Regular</option>
+          </select>
+          <p id="ticketTypeError" class="text-sm text-red-600 mt-2"></p>
+        </div>
+
+        <div>
+          <label
+            for="ticketCount"
+            class="block mb-2 font-semibold text-primary"
+            >จำนวนตั๋ว</label
+          >
+          <input
+            type="number"
+            id="ticketCount"
+            min="1"
+            max="5"
+            class="w-full border border-gray-300 rounded-xl p-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+            placeholder="จำนวนตั๋วที่ต้องการ (สูงสุด 5)"
+          />
+          <p id="ticketCountError" class="text-sm text-red-600 mt-2"></p>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full btn-primary text-white font-bold text-lg py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"
+        >
+          จองตั๋วเลย
+        </button>
+      </form>
+    </div>
+
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4"
+    >
+      <div
+        class="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300"
+      >
+        <div class="flex justify-center mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-16 h-16 text-primary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-primary mb-3">จองสำเร็จ!</h3>
+        <p
+          id="modalMessage"
+          class="text-gray-700 text-lg font-medium leading-relaxed"
+        ></p>
+      </div>
+    </div>
+    <script>
+      const form = document.getElementById("BookingForm");
+      const modal = document.getElementById("successModal");
+      const modalMessage = document.getElementById("modalMessage");
+
+      const fullName = document.getElementById("fullName");
+      const phone = document.getElementById("phone");
+      const ticketCount = document.getElementById("ticketCount");
+      const ticketType = document.getElementById("ticketType");
+
+      const errors = {
+        fullName: document.getElementById("fullNameError"),
+        phone: document.getElementById("phoneError"),
+        ticketCount: document.getElementById("ticketCountError"),
+        ticketType: document.getElementById("ticketTypeError"),
+      };
+
+      const validate = () => {
+        let isValid = true;
+        Object.values(errors).forEach((el) => (el.textContent = ""));
+
+        const nameRegex = /^[ก-๙a-zA-Z\s]{4,}$/;
+        if (!nameRegex.test(fullName.value.trim())) {
+          errors.fullName.textContent =
+            "กรุณากรอกชื่อ-นามสกุลให้ถูกต้อง (ไทยหรืออังกฤษ)";
+          isValid = false;
+        }
+
+        const phoneVal = phone.value.trim();
+        const phoneRegex = /^0\d{9}$/;
+
+        if (phoneVal === "0000000000") {
+          errors.phone.textContent = "ห้ามกรอกเบอร์ 0 ทั้งหมด";
+          isValid = false;
+        } else if (!phoneRegex.test(phoneVal)) {
+          errors.phone.textContent = "กรุณากรอกเบอร์โทร 10 หลักขึ้นต้นด้วย 0";
+          isValid = false;
+        }
+
+        const count = parseInt(ticketCount.value);
+        if (isNaN(count) || count < 1 || count > 5) {
+          errors.ticketCount.textContent = "ใส่จำนวนตั๋วระหว่าง 1 ถึง 5";
+          isValid = false;
+        } else if (["vip", "premium"].includes(ticketType.value) && count > 2) {
+          errors.ticketCount.textContent = "VIP และ Premium จำกัดไม่เกิน 2 ใบ";
+          isValid = false;
+        }
+
+        if (!ticketType.value) {
+          errors.ticketType.textContent = "กรุณาเลือกประเภทตั๋ว";
+          isValid = false;
+        }
+
+        return isValid;
+      };
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (validate()) {
+          modalMessage.textContent = `คุณจองตั๋ว ${
+            ticketCount.value
+          } ใบ ประเภท ${
+            ticketType.options[ticketType.selectedIndex].text
+          } เรียบร้อยแล้ว`;
+          modal.classList.remove("hidden");
+          modal
+            .querySelector("div")
+            .classList.replace("scale-95", "scale-100");
+          // form.reset();
+        }
+      });
+
+      [fullName, phone, ticketCount, ticketType].forEach((input) => {
+        input.addEventListener("input", validate);
+        input.addEventListener("change", validate);
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.add("hidden");
+          modal
+            .querySelector("div")
+            .classList.replace("scale-100", "scale-95");
+          form.reset();
+          Object.values(errors).forEach((el) => (el.textContent = ""));
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          modal.classList.add("hidden");
+          modal
+            .querySelector("div")
+            .classList.replace("scale-100", "scale-95");
+          form.reset();
+          Object.values(errors).forEach((el) => (el.textContent = ""));
+        }
+      });
+    </script>
+  </body>
+</html>

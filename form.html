@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ฟอร์มรับสมัคร</title>
+</head>
+<body>
+    <!--Required-->
+  <h1>แบบฟอร์มรับสมัคร</h1>
+
+  <form action="">
+    <label for="name">ชื่อ-นามสกุล:</label>
+    <input type="text" name="name" id="name" required minlength="10" maxlength="15"> <!--Minlength-Maxlength-->
+
+    <label for="email">อีเมล: mju67XXXXXXXX@mju.ac.th</label>
+    <input type="email" name="email" id="email" 
+    pattern="^mju67{0-9}{8}@mju\.ac\.th"
+    required>
+
+    <!--grade: A B+ B C+ C D+ D F-->
+    <label for="text">Grade:</label>
+    <input for="text" name="grade"
+    pattern="^(A|B\+|B|C\+|C|D\+|D|F)$"
+    required> 
+
+    <!--GPA 1.75-4.00-->
+    <label for="text">GPA:</label>
+    <input type="text" name="gpa"
+    pattern="^(1\.75|[2-3]\.\d{2}|4\.00)$"
+    required>
+
+    <!--เลขคู่-->
+    <label for="text">EvenNumber:</label>
+    <input type="text" name="even" id="number" 
+    pattern="^\d*[02468]$"
+    required>
+
+    <!--รหัสผ่าน8ตัว-->
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" 
+    pattern="^(?=[A-Za-z0-9]{8}$)(?=.*thai)[A-Za-z0-9]+$"
+    required>
+
+    <!--ทะเบียนรถ-->
+    <label for="text">Linecse:</label>
+    <input type="text" name="license" id="license" 
+    pattern="^[1-9] [A-Z a-z ก-๙]+ \d{4} [ก-๙]+$"
+    required>
+
+    <!--หมายเลขครุภัณฑ์  เช่น ABC-1234-XYZ-->
+    <label for="text">Asset Tag Number:</label>
+    <input type="text" name="Asset Tag Number" id="tag" 
+    pattern="^[A-Z ก-๙]{3}-\d{4}-[A-Z ก-๙]{3}$"
+    required>
+
+    <!--Min-Max-->
+    <label for="number">Age:</label>
+    <input type="number" name="age" id="number" min="1" max="100" required>
+
+    <label for="rank">Rank:(1-5):</label>
+    <input type="range" name="rank" id="rank" min="1" max="5" required>
+
+    <button type="submit">ส่งข้อมูล</button>
+  </form>
+
+  <script>
+    
+  </script>
+</body>
+</html>

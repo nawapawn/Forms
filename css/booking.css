@@ -1,0 +1,16 @@
+
+      /* Custom CSS for a modern look */
+      body {
+        font-family: "Prompt", sans-serif;
+      }
+      .btn-primary {
+        background-color: #f7ab0a; /* Gold */
+      }
+      .btn-primary:hover {
+        background-color: #e59a00; /* Darker Gold on hover */
+        box-shadow: 0 10px 15px -3px rgba(247, 171, 10, 0.5),
+          0 4px 6px -2px rgba(247, 171, 10, 0.05);
+      }
+      .text-primary {
+        color: #0a2647; /* Dark Blue */
+      }

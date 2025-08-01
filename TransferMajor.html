@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>คำร้องขอโอนย้ายสาขาวิชาต่างคณะ</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  body {
+    font-family: "Noto Sans Thai Looped", sans-serif;
+  }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-3xl w-full bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+    <h1 class="text-3xl font-bold text-blue-800 mb-6 text-center">คำร้องขอโอนย้ายสาขาวิชาต่างคณะ</h1>
+    <form id="transferForm" class="space-y-6">
+      
+      <!-- วันที่ -->
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label for="day" class="block mb-1 font-semibold text-blue-800">วันที่</label>
+          <input type="number" id="day" min="1" max="31" placeholder="วัน" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+        </div>
+        <div>
+          <label for="month" class="block mb-1 font-semibold text-blue-800">เดือน</label>
+          <input type="text" id="month" placeholder="เดือน" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+        </div>
+        <div>
+          <label for="year" class="block mb-1 font-semibold text-blue-800">พ.ศ.</label>
+          <input type="number" id="year" min="2500" max="3000" placeholder="พ.ศ." class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+        </div>
+      </div>
+
+      <!-- ชื่อ-นามสกุล -->
+      <div>
+        <label for="fullname" class="block mb-1 font-semibold text-blue-800">ชื่อ-นามสกุล</label>
+        <input type="text" id="fullname" placeholder="นาย/นาง/นางสาว ชื่อ-นามสกุล" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- รหัสนักศึกษา -->
+      <div>
+        <label for="studentId" class="block mb-1 font-semibold text-blue-800">รหัสนักศึกษา</label>
+        <input type="text" id="studentId" placeholder="รหัสนักศึกษา" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- โทรศัพท์มือถือ -->
+      <div>
+        <label for="phone" class="block mb-1 font-semibold text-blue-800">โทรศัพท์มือถือ</label>
+        <input type="text" id="phone" placeholder="08x-xxxxxxx" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- ระบบการศึกษา -->
+      <div>
+        <label class="block mb-1 font-semibold text-blue-800">ระบบการศึกษา</label>
+        <select id="system" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none bg-white">
+          <option value="" disabled selected>-- เลือกระบบ --</option>
+          <option value="4-5ปี">4 – 5 ปี</option>
+          <option value="4ปีเทียบเข้าเรียน(2ปี)">4 ปีเทียบเข้าเรียน (2 ปี)</option>
+          <option value="ภาคปกติ">ภาคปกติ</option>
+          <option value="ภาคสมทบ">ภาคสมทบ</option>
+        </select>
+      </div>
+
+      <!-- สาขาวิชาเดิม -->
+      <div>
+        <label for="oldMajor" class="block mb-1 font-semibold text-blue-800">สาขาวิชาเดิม</label>
+        <input type="text" id="oldMajor" placeholder="สาขาวิชาเดิม" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- คณะเดิม -->
+      <div>
+        <label for="oldFaculty" class="block mb-1 font-semibold text-blue-800">คณะเดิม</label>
+        <input type="text" id="oldFaculty" placeholder="คณะเดิม" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- สาขาวิชาที่ต้องการโอน -->
+      <div>
+        <label for="newMajor" class="block mb-1 font-semibold text-blue-800">สาขาวิชาที่ต้องการโอน</label>
+        <input type="text" id="newMajor" placeholder="สาขาวิชาที่ต้องการโอน" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+      </div>
+
+      <!-- เหตุผลการโอน -->
+      <div>
+        <label for="reason" class="block mb-1 font-semibold text-blue-800">เหตุผลการโอน</label>
+        <textarea id="reason" rows="3" placeholder="ระบุเหตุผลการโอน" class="w-full p-3 rounded-md border border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none resize-none"></textarea>
+      </div>
+
+      <!-- คุณสมบัติครบถ้วน -->
+      <div>
+        <label class="block mb-1 font-semibold text-blue-800">คุณสมบัติครบถ้วนในการขอโอนย้ายสาขาวิชา</label>
+        <div class="space-y-3 pl-4 text-gray-700">
+          <label class="flex items-start gap-2">
+            <input type="checkbox" id="qualify1" class="mt-1 w-5 h-5 text-blue-700 focus:ring-blue-700" />
+            <span>หลักสูตร 4 ปีเทียบเข้าเรียน (2 ปี): ศึกษาตามแผนสาขาเดิมไม่น้อยกว่า 1 ภาคการศึกษาปกติ</span>
+          </label>
+          <label class="flex items-start gap-2">
+            <input type="checkbox" id="qualify2" class="mt-1 w-5 h-5 text-blue-700 focus:ring-blue-700" />
+            <span>มีหน่วยกิตสะสมไม่น้อยกว่า 18 หน่วยกิต และเกรดเฉลี่ยสะสมไม่น้อยกว่า 2.00</span>
+          </label>
+          <label class="flex items-start gap-2">
+            <input type="checkbox" id="qualify3" class="mt-1 w-5 h-5 text-blue-700 focus:ring-blue-700" />
+            <span>หลักสูตร 4 ปี: ศึกษาตามแผนสาขาเดิมไม่น้อยกว่า 2 ภาคการศึกษาปกติ</span>
+          </label>
+          <label class="flex items-start gap-2">
+            <input type="checkbox" id="qualify4" class="mt-1 w-5 h-5 text-blue-700 focus:ring-blue-700" />
+            <span>มีหน่วยกิตสะสมไม่น้อยกว่า 30 หน่วยกิต และเกรดเฉลี่ยสะสมไม่น้อยกว่า 2.00</span>
+          </label>
+          <label class="flex items-start gap-2">
+            <input type="checkbox" id="qualify5" class="mt-1 w-5 h-5 text-blue-700 focus:ring-blue-700" />
+            <span>ยื่นคำร้องโอนย้ายภายในคณะก่อนวันที่ ............</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ปุ่มส่ง -->
+      <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-md shadow-md transition">
+        ส่งคำร้อง
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('transferForm');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // ตัวอย่าง validation ง่ายๆ (เพิ่มได้เองตามต้องการ)
+      const fullname = document.getElementById('fullname').value.trim();
+      const studentId = document.getElementById('studentId').value.trim();
+
+      if (!fullname || !studentId) {
+        alert('กรุณากรอกชื่อ-นามสกุล และรหัสนักศึกษา');
+        return;
+      }
+
+      alert('ส่งคำร้องเรียบร้อยแล้ว');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
