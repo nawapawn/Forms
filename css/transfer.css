@@ -1,0 +1,22 @@
+
+      body {
+        font-family: "Prompt", sans-serif;
+      }
+      .form-section-title {
+        @apply text-xl font-semibold text-blue-800 border-b-2 border-blue-200 pb-2 mb-4;
+      }
+      .label-text {
+        @apply block text-sm font-medium text-gray-700 mb-1;
+      }
+      .input-field {
+        @apply w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition;
+      }
+      .radio-label {
+        @apply flex items-center text-gray-700;
+      }
+      .radio-input {
+        @apply w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500;
+      }
+      .flatpickr-input {
+        @apply w-full p-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition;
+      }
