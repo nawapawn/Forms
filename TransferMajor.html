@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>คำร้องขอโอนย้ายสาขาวิชา</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/transfer.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
@@ -15,8 +16,10 @@
     />
 
   </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-3xl w-full bg-white rounded-xl shadow-lg p-8 lg:p-10">
+  <body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+    <div
+      class="max-w-3xl w-full bg-white rounded-xl shadow-lg p-8 lg:p-10"
+    >
       <div class="text-center mb-6">
         <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">
           คำร้องขอโอนย้ายสาขาวิชาต่างคณะ
@@ -34,18 +37,34 @@
               <label class="label-text md:col-span-1">คำนำหน้า</label>
               <div class="flex gap-4 md:col-span-3">
                 <label class="radio-label">
-                  <input type="radio" name="prefix" value="นาย" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="prefix"
+                    value="นาย"
+                    class="radio-input mr-2"
+                  />
                   นาย
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="prefix" value="นาง" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="prefix"
+                    value="นาง"
+                    class="radio-input mr-2"
+                  />
                   นาง
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="prefix" value="นางสาว" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="prefix"
+                    value="นางสาว"
+                    class="radio-input mr-2"
+                  />
                   นางสาว
                 </label>
               </div>
+              <p id="prefix-error" class="error-message col-span-full"></p>
             </div>
             <div>
               <label for="fullname" class="label-text">ชื่อ-นามสกุล</label>
@@ -55,6 +74,7 @@
                 placeholder="ชื่อ-นามสกุล"
                 class="input-field"
               />
+              <p id="fullname-error" class="error-message"></p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -62,10 +82,11 @@
                 <input
                   type="text"
                   id="studentId"
-                  placeholder="เช่น 670xxxxxx"
+                  placeholder="เช่น 670xxxxxxx"
                   maxlength="10"
                   class="input-field"
                 />
+                <p id="studentId-error" class="error-message"></p>
               </div>
               <div>
                 <label for="phone" class="label-text">โทรศัพท์มือถือ</label>
@@ -73,8 +94,10 @@
                   type="tel"
                   id="phone"
                   placeholder="เช่น 08x-xxxxxxx"
+                  maxlength="10"
                   class="input-field"
                 />
+                <p id="phone-error" class="error-message"></p>
               </div>
             </div>
           </div>
@@ -89,22 +112,43 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-1"
               >
                 <label class="radio-label">
-                  <input type="radio" name="programType" value="4-5ปี" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="programType"
+                    value="4-5ปี"
+                    class="radio-input mr-2"
+                  />
                   4 – 5 ปี
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="programType" value="4ปีเทียบเข้าเรียน(2ปี)" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="programType"
+                    value="4ปีเทียบเข้าเรียน(2ปี)"
+                    class="radio-input mr-2"
+                  />
                   4 ปีเทียบเข้าเรียน (2 ปี)
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="programType" value="ภาคปกติ" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="programType"
+                    value="ภาคปกติ"
+                    class="radio-input mr-2"
+                  />
                   ภาคปกติ
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="programType" value="ภาคสมทบ" class="radio-input mr-2" />
+                  <input
+                    type="radio"
+                    name="programType"
+                    value="ภาคสมทบ"
+                    class="radio-input mr-2"
+                  />
                   ภาคสมทบ
                 </label>
               </div>
+              <p id="programType-error" class="error-message"></p>
             </div>
             <div>
               <label for="oldMajor" class="label-text">สาขาวิชาเดิม</label>
@@ -114,6 +158,7 @@
                 placeholder="ระบุสาขาวิชาเดิม"
                 class="input-field"
               />
+              <p id="oldMajor-error" class="error-message"></p>
             </div>
             <div>
               <label for="oldFaculty" class="label-text">คณะเดิม</label>
@@ -123,6 +168,7 @@
                 placeholder="ระบุคณะเดิม"
                 class="input-field"
               />
+              <p id="oldFaculty-error" class="error-message"></p>
             </div>
           </div>
         </div>
@@ -140,6 +186,7 @@
                 placeholder="ระบุสาขาวิชาที่ต้องการโอน"
                 class="input-field"
               />
+              <p id="newMajor-error" class="error-message"></p>
             </div>
             <div>
               <label for="reason" class="label-text">เหตุผล</label>
@@ -149,6 +196,7 @@
                 placeholder="ระบุเหตุผลในการโอนย้าย"
                 class="input-field resize-none"
               ></textarea>
+              <p id="reason-error" class="error-message"></p>
             </div>
           </div>
         </div>
@@ -158,13 +206,23 @@
           <div class="space-y-3 text-gray-700 text-sm">
             <p class="font-bold">หลักสูตร 4 ปีเทียบเข้าเรียน (2ปี)</p>
             <ul class="list-disc list-inside pl-4 space-y-2">
-              <li>ได้ศึกษาตามแผนการศึกษาในสาขาวิชาเดิมมาแล้วไม่น้อยกว่า 1 ภาคการศึกษาปกติ</li>
-              <li>มีหน่วยกิตสะสมไม่น้อยกว่า 18 หน่วยกิต และมีแต้มระดับคะแนนเฉลี่ยสะสมไม่น้อยกว่า 2.00</li>
+              <li>
+                ได้ศึกษาตามแผนการศึกษาในสาขาวิชาเดิมมาแล้วไม่น้อยกว่า 1 ภาคการศึกษาปกติ
+              </li>
+              <li>
+                มีหน่วยกิตสะสมไม่น้อยกว่า 18 หน่วยกิต และมีแต้มระดับคะแนนเฉลี่ยสะสมไม่น้อยกว่า
+                2.00
+              </li>
             </ul>
             <p class="font-bold mt-4">หลักสูตร 4 ปี</p>
             <ul class="list-disc list-inside pl-4 space-y-2">
-              <li>ได้ศึกษาตามแผนการศึกษาในสาขาวิชาเดิมมาแล้วไม่น้อยกว่า 2 ภาคการศึกษาปกติ</li>
-              <li>มีหน่วยกิตสะสมไม่น้อยกว่า 30 หน่วยกิต และมีแต้มระดับคะแนนเฉลี่ยสะสมไม่น้อยกว่า 2.00</li>
+              <li>
+                ได้ศึกษาตามแผนการศึกษาในสาขาวิชาเดิมมาแล้วไม่น้อยกว่า 2 ภาคการศึกษาปกติ
+              </li>
+              <li>
+                มีหน่วยกิตสะสมไม่น้อยกว่า 30 หน่วยกิต และมีแต้มระดับคะแนนเฉลี่ยสะสมไม่น้อยกว่า
+                2.00
+              </li>
             </ul>
           </div>
           <div class="mt-6 flex items-center gap-2">
@@ -178,17 +236,47 @@
               class="input-field"
             />
           </div>
+          <p id="transferDate-error" class="error-message mt-1"></p>
         </div>
 
         <div class="pt-4">
           <button
             type="submit"
-            class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg shadow-md transition"
+            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg shadow-md transition"
           >
             ส่งคำร้อง
           </button>
         </div>
       </form>
+    </div>
+
+    <div id="successModal" class="modal-bg hidden">
+      <div class="modal-card">
+        <div class="text-6xl text-emerald-500 mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-16 w-16 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">ส่งข้อมูลสำเร็จ!</h3>
+        <p class="text-gray-600 mb-4">คำร้องของคุณถูกส่งเรียบร้อยแล้ว</p>
+        <button
+          id="closeModalBtn"
+          class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full transition-colors"
+        >
+          ปิด
+        </button>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -200,22 +288,185 @@
       });
 
       const form = document.getElementById("transferForm");
+      const successModal = document.getElementById("successModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+
+      const getRadioValue = (name) => {
+        const radios = document.getElementsByName(name);
+        for (const radio of radios) {
+          if (radio.checked) {
+            return radio.value;
+          }
+        }
+        return null;
+      };
+
+      const validateField = (field, value) => {
+        let error = "";
+
+        switch (field) {
+          case "prefix":
+            if (!getRadioValue("prefix")) {
+              error = "กรุณาเลือกคำนำหน้า";
+            }
+            break;
+          case "fullname":
+            if (!value.trim()) {
+              error = "กรุณากรอกชื่อ-นามสกุล";
+            }
+            break;
+          case "studentId":
+            if (!value.trim()) {
+              error = "กรุณากรอกรหัสนักศึกษา";
+            } else if (!/^\d{10}$/.test(value.trim())) {
+              error = "รหัสนักศึกษาต้องเป็นตัวเลข 10 หลักเท่านั้น";
+            }
+            break;
+          case "phone":
+            const phoneValue = value.trim();
+            if (!phoneValue) {
+              error = "กรุณากรอกเบอร์โทรศัพท์";
+            } else if (!/^0(6|8|9)\d{8}$/.test(phoneValue)) {
+              error = "เบอร์โทรศัพท์ต้องขึ้นต้นด้วย 06, 08 หรือ 09 และมี 10 หลัก";
+            }
+            break;
+          case "programType":
+            if (!getRadioValue("programType")) {
+              error = "กรุณาเลือกหลักสูตร";
+            }
+            break;
+          case "oldMajor":
+            if (!value.trim()) {
+              error = "กรุณากรอกสาขาวิชาเดิม";
+            }
+            break;
+          case "oldFaculty":
+            if (!value.trim()) {
+              error = "กรุณากรอกคณะเดิม";
+            }
+            break;
+          case "newMajor":
+            if (!value.trim()) {
+              error = "กรุณากรอกสาขาวิชาที่ต้องการโอน";
+            }
+            break;
+          case "reason":
+            if (!value.trim()) {
+              error = "กรุณากรอกเหตุผล";
+            }
+            break;
+          case "transferDate":
+            if (!value.trim()) {
+              error = "กรุณาเลือกวันยื่นคำร้อง";
+            }
+            break;
+        }
+
+        document.getElementById(`${field}-error`).textContent = error;
+        return error === "";
+      };
+
+      const validateAll = () => {
+        let isValid = true;
+        isValid = validateField("prefix", null) && isValid;
+        isValid = validateField(
+          "fullname",
+          document.getElementById("fullname").value
+        ) && isValid;
+        isValid = validateField(
+          "studentId",
+          document.getElementById("studentId").value
+        ) && isValid;
+        isValid = validateField(
+          "phone",
+          document.getElementById("phone").value
+        ) && isValid;
+        isValid = validateField("programType", null) && isValid;
+        isValid = validateField(
+          "oldMajor",
+          document.getElementById("oldMajor").value
+        ) && isValid;
+        isValid = validateField(
+          "oldFaculty",
+          document.getElementById("oldFaculty").value
+        ) && isValid;
+        isValid = validateField(
+          "newMajor",
+          document.getElementById("newMajor").value
+        ) && isValid;
+        isValid = validateField(
+          "reason",
+          document.getElementById("reason").value
+        ) && isValid;
+        isValid = validateField(
+          "transferDate",
+          document.getElementById("transferDate").value
+        ) && isValid;
+        return isValid;
+      };
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Basic validation
-        const fullname = document.getElementById("fullname").value.trim();
-        const studentId = document.getElementById("studentId").value.trim();
-
-        if (!fullname || !studentId) {
-          alert("กรุณากรอกชื่อ-นามสกุล และรหัสนักศึกษาให้ครบถ้วน");
-          return;
+        if (validateAll()) {
+          successModal.classList.remove("hidden");
         }
-
-        alert("ส่งคำร้องเรียบร้อยแล้ว");
-        form.reset();
       });
+
+      closeModalBtn.addEventListener("click", () => {
+        successModal.classList.add("hidden");
+        form.reset();
+        document.querySelectorAll(".error-message").forEach((el) => {
+          el.textContent = "";
+        });
+      });
+
+      successModal.addEventListener("click", (e) => {
+        if (e.target === successModal) {
+          successModal.classList.add("hidden");
+          form.reset();
+          document.querySelectorAll(".error-message").forEach((el) => {
+            el.textContent = "";
+          });
+        }
+      });
+
+      // Event listeners for real-time validation
+      document
+        .getElementById("fullname")
+        .addEventListener("input", (e) => validateField("fullname", e.target.value));
+      document
+        .getElementById("studentId")
+        .addEventListener("input", (e) => validateField("studentId", e.target.value));
+      document
+        .getElementById("phone")
+        .addEventListener("input", (e) => validateField("phone", e.target.value));
+      document
+        .getElementById("oldMajor")
+        .addEventListener("input", (e) => validateField("oldMajor", e.target.value));
+      document
+        .getElementById("oldFaculty")
+        .addEventListener("input", (e) => validateField("oldFaculty", e.target.value));
+      document
+        .getElementById("newMajor")
+        .addEventListener("input", (e) => validateField("newMajor", e.target.value));
+      document
+        .getElementById("reason")
+        .addEventListener("input", (e) => validateField("reason", e.target.value));
+      document
+        .getElementById("transferDate")
+        .addEventListener("input", (e) => validateField("transferDate", e.target.value));
+
+      document.querySelectorAll('input[name="prefix"]').forEach((radio) => {
+        radio.addEventListener("change", () => validateField("prefix", null));
+      });
+      document
+        .querySelectorAll('input[name="programType"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", () =>
+            validateField("programType", null)
+          );
+        });
     </script>
   </body>
 </html>
